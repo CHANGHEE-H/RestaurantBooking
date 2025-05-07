@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "gmock/gmock.h"
 #include "schedule.cpp"
 
 class SmsSender {
@@ -11,14 +12,5 @@ public:
 
 class TestableSmsSender : public SmsSender {
 public:
-	void send(Schedule* schedule) override {
-		std::cout << "Run SMS Sender" << std::endl;
-		sendMethodIsCalled = true;
-	}
-
-	bool isSendMethodIsCalled() {
-		return sendMethodIsCalled;
-	}
-private:
-	bool sendMethodIsCalled;
+	MOCK_METHOD(void, send, (Schedule*), (override));
 };
